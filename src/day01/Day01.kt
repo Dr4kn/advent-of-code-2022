@@ -4,8 +4,20 @@ import readInput
 
 fun main() {
     fun part1(input: List<String>): Int {
-        print(input)
-        return 2400
+        var maxValue = 0
+        var currentValue = 0
+
+        input.forEach { value ->
+            if (value == "") {
+                if (currentValue > maxValue) {
+                    maxValue = currentValue
+                }
+                currentValue = 0
+            } else {
+                currentValue += value.toInt()
+            }
+        }
+        return maxValue
     }
 
     fun part2(input: List<String>): Int {
