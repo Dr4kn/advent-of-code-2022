@@ -7,15 +7,16 @@ fun main() {
         var maxValue = 0
         var currentValue = 0
 
-        input.forEach { value ->
-            if (value == "") {
+        input.forEachIndexed { index, value ->
+            if (value != "") {
+                currentValue += value.toInt()
+            }
+
+            if (value == "" || index == input.size - 1) {
                 if (currentValue > maxValue) {
                     maxValue = currentValue
                 }
                 currentValue = 0
-            } else {
-                // doesn't reach last element
-                currentValue += value.toInt()
             }
         }
         return maxValue
