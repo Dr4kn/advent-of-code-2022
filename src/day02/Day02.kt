@@ -13,7 +13,7 @@ fun main() {
         }
     }
 
-    fun scoring(you: Int, elf: Int): Int {
+    fun scoring(elf: Int, you: Int): Int {
         if (you == elf) {
             return you + 3
         }
