@@ -24,7 +24,7 @@ fun main() {
 
     fun part2(input: List<String>): Int {
         var currentValue = 0
-        val topThree: IntArray = intArrayOf(0, 0, 0)
+        val topThree: IntArray = IntArray(3)
 
         input.forEachIndexed { index, value ->
             if (value != "") {
