@@ -1,35 +1,36 @@
-import java.lang.NumberFormatException
+import java.io.CharArrayWriter
+import java.io.File
+import java.lang.StringBuilder
 
 fun main() {
-    fun numberOfStacks(input: List<String>): Int {
-        input.forEach { string ->
-            if (string[1].isDigit()) {
-                return (string.length / 4) + 1
+    fun buildStack(cargo: String): MutableList<String> {
+        val list: MutableList<String> = mutableListOf("", "", "")
+        
+        cargo.lines().dropLast(1).reversed().forEach {
+            for (i in 1 until it.length step 4) {
+                if (it[i] != ' ') { // expects letters
+                    list[i / 4] += it[i].toString()
+                }
             }
         }
-        return 0
+        return list
     }
 
-    fun parseInput(input: List<String>) {
-        print(numberOfStacks(input))
-    }
-
-    fun part1(input: List<String>): String {
-        // cargo
-        // cargoCrane
-        parseInput(input)
+    fun part1(input: String): String {
+        val inputSplit = input.split("\n\n")
+        val stack = buildStack(inputSplit[0])
         return "CMZ"
     }
 
-    fun part2(input: List<String>): String {
+    fun part2(input: String): String {
         return "CMZ"
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day05_test")
+    val testInput = readInputAsString("Day05_test")
     check(part1(testInput) == "CMZ")
 
-    val input = readInput("Day05")
+    val input = readInputAsString("Day05")
 //    println(part1(input))
 //    println(part2(input))
 }
