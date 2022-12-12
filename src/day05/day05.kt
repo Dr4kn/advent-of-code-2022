@@ -31,17 +31,7 @@ fun main() {
         return list
     }
 
-    fun part1(input: String): String {
-        val inputSplit = input.split("\n\n")
-        val stack = buildStack(inputSplit[0])
-        val instructions = buildInstructionSet(inputSplit[1])
-
-        instructions.forEach { list ->
-            for (i in 0..list[0]) {
-                stack[list[2]].add(stack[list[1]].last())
-                stack[list[1]].removeLast()
-            }
-        }
+    fun getResult(stack: MutableList<MutableList<Char>>): String {
         var firstCrates = ""
         stack.forEach {
             try {
@@ -53,9 +43,39 @@ fun main() {
         return firstCrates
     }
 
-//    fun part2(input: String): String {
-//        return "CMZ"
-//    }
+
+    fun part1(input: String): String {
+        val inputSplit = input.split("\n\n")
+        val stack = buildStack(inputSplit[0])
+        val instructions = buildInstructionSet(inputSplit[1])
+
+        instructions.forEach { list ->
+            for (i in 0..list[0]) {
+                stack[list[2]].add(stack[list[1]].last())
+                stack[list[1]].removeLast()
+            }
+        }
+        return getResult(stack)
+    }
+
+    fun part2(input: String): String {
+        val inputSplit = input.split("\n\n")
+        val stack = buildStack(inputSplit[0])
+        val instructions = buildInstructionSet(inputSplit[1])
+
+        instructions.forEach { list ->
+            if (list[0] == 0) {
+                stack[list[2]].add(stack[list[1]].last())
+                stack[list[1]].removeLast()
+            } else {
+                for ((offset, i) in (stack[list[1]].size - list[0] - 1 until stack[list[1]].size).withIndex()) {
+                    stack[list[2]].add(stack[list[1]][i - offset])
+                    stack[list[1]].removeAt(i - offset)
+                }
+            }
+        }
+        return getResult(stack)
+    }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInputAsString("Day05_test")
@@ -63,5 +83,5 @@ fun main() {
 
     val input = readInputAsString("Day05")
     println(part1(input))
-//    println(part2(input))
+    println(part2(input))
 }
