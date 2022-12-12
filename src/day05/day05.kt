@@ -1,7 +1,6 @@
-import java.io.CharArrayWriter
-import java.io.File
-import java.lang.IndexOutOfBoundsException
-import java.lang.StringBuilder
+package day05
+
+import readInputAsString
 import java.util.NoSuchElementException
 
 fun main() {
@@ -44,7 +43,7 @@ fun main() {
             }
         }
         var firstCrates = ""
-        stack.forEach { it ->
+        stack.forEach {
             try {
                 firstCrates += it.last()
             } catch (e: NoSuchElementException) { // MutableArrays are at least of size 12
@@ -54,13 +53,13 @@ fun main() {
         return firstCrates
     }
 
-    fun part2(input: String): String {
-        return "CMZ"
-    }
+//    fun part2(input: String): String {
+//        return "CMZ"
+//    }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInputAsString("Day05_test")
-//    check(part1(testInput) == "CMZ")
+    check(part1(testInput) == "CMZ")
 
     val input = readInputAsString("Day05")
     println(part1(input))
